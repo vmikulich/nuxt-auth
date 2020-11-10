@@ -24,7 +24,14 @@ export const actions = {
     } catch (e) {
       throw e
     }
-    
+  },
+  async signup ({ dispatch }, payload) {
+    try {
+      const res = await this.$axios.$post('/api/registration', payload)
+      dispatch('login', payload)
+    } catch (e) {
+      throw e
+    }
   },
   logout ({ commit }) {
     commit('clearToken')

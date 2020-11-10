@@ -1,13 +1,12 @@
 <template>
-   <div>
+   <el-container>
     <Navbar />
-
-    <main>
+    <el-main>
       <div class="container">
         <Nuxt />
       </div>
-    </main>
-  </div>
+    </el-main>
+  </el-container>
 </template>
 
 <style>

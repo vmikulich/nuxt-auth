@@ -18,15 +18,15 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    '@/node_modules/bootstrap/dist/css/bootstrap.min.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    { src: '~plugins/element-ui', ssr: true },
+    {src: '~/plugins/vuelidate', ssr: false}
   ],
 
   serverMiddleware: [
-    // body-parser middleware
     bodyParser.json(),
     bodyParser.urlencoded({extended: true}),
     session({
@@ -36,7 +36,6 @@ export default {
       cookie: { maxAge: 60000 }
     }),
     '~/api'
-    // { path: "/api", handler: "~/api/index.js" }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -55,5 +54,8 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    // vendor: [
+    //   'vuelidate'
+    // ]
   }
 }

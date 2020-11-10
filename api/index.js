@@ -1,6 +1,9 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 import autRouter  from './routers/auth'
+
+dotenv.config()
 
 const app = express()
 
@@ -14,7 +17,7 @@ router.use((req, res, next) => {
   next()
 })
 
-mongoose.connect(`mongodb+srv://Vlad:qazxcvbnm123@coursework.k9oqd.mongodb.net/todo?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`${process.env.MONGO_URI}`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(error => {
     console.log(error)

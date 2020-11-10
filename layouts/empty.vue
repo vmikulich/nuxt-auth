@@ -6,8 +6,9 @@
 
 <style>
 .empty-layout {
+  height: 100vh;
   display: flex;
   justify-content: center;
-  padding-top: 5rem;
+  align-items: center;
 }
 </style>

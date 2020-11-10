@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <!-- <div class="form-container">
     <div v-if="$route.query.message" class="alert alert-danger mb-3">
       Need login first
     </div>
@@ -26,23 +26,77 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  </div>
+  </div> -->
+  <el-form
+    label-position="top"
+    :model="user"
+    @submit.native.prevent="onSubmit"
+  >
+    <el-form-item label="Email">
+      <el-input
+        type="email" 
+        v-model="user.email"
+      >
+      </el-input>
+    </el-form-item>
+    <el-form-item label="Password">
+      <el-input
+        type="password"
+        v-model="user.password"
+      >
+      </el-input>
+    </el-form-item>
+    <p>
+      If you do not an account, go to 
+      <NuxtLink
+        to="/signup"
+        tag="span"
+        no-prefetch
+      >
+        <el-link type="primary">Sign up</el-link>
+      </NuxtLink>
+      page.
+    </p>
+    <el-form-item>
+      <el-button
+        type="primary"
+        native-type="submit"
+      >
+      Submit
+    </el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators'
+
 export default {
-  // layout: 'empty',
+  layout: 'empty',
   data () {
     return {
-      email: '',
-      password: ''
+      user: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  validations: {
+    user: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required
+      }
     }
   },
   methods: {
     onSubmit () {
       const user = {
-        email: this.email,
-        password: this.password
+        email: this.user.email,
+        password: this.user.password
       }
       this.$store.dispatch('login', user).then(() => {
         this.$router.push('/')
@@ -54,8 +108,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.form-container {
-  width: 500px;
-}
+<style lang="scss" scoped>
+
 </style>
