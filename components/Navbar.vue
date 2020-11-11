@@ -1,54 +1,72 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Nuxt project</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <NuxtLink
-            to="/"
-            active-class="active"
-            class="nav-link"
-            no-prefetch
-            exact
-          >
-            Home
-          </NuxtLink>
-        </li>
-        <li v-if="!hasToken" class="nav-item">
-          <NuxtLink
-            to="/login"
-            active-class="active"
-            class="nav-link"
-            no-prefetch
-          >
-            Login
-          </NuxtLink>
-        </li>
-        <li v-else class="nav-item">
-          <a
-            href="#"
-            class="nav-link"
-            @click.prevent="logout"
-          >
-            Logout
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div class="navbar-container">
+    <el-menu class="el-menu-demo" mode="horizontal">
+      <el-menu-item index="1">
+        <NuxtLink
+          to="/"
+          active-class="active"
+          class="nav-link"
+          no-prefetch
+          exact
+        >
+          Home
+        </NuxtLink>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <NuxtLink
+          to="/about"
+          active-class="active"
+          class="nav-link"
+          no-prefetch
+        >
+          About
+        </NuxtLink>
+      </el-menu-item>
+    </el-menu>
+    <el-button
+      type="primary"
+      @click.prevent="onLogout"
+    >
+      Logout
+    </el-button>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   computed: {
-    hasToken () {
-      return this.$store.getters.hasToken
-    }
+    ...mapGetters({
+      hasToken: 'hasToken'
+    })
   },
   methods: {
-    logout () {
-      this.$store.dispatch('logout').then(() => this.$router.push('/login'))
+    ...mapActions({
+      logout: 'logout'
+    }),
+    onLogout () {
+      this.logout().then(() => this.$router.push('/login'))
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #EBEEF5;
+  a {
+    text-decoration: none;
+  }
+  .logout {
+    color: #000;
+    transition: hover .3s;
+    &:hover {
+      background-color: #DCDFE6;
+    }
+  }
+}
+
+</style>

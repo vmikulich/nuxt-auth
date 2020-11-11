@@ -1,6 +1,8 @@
 <template>
    <el-container>
-    <Navbar />
+     <el-header>
+       <Navbar />
+     </el-header>
     <el-main>
       <div class="container">
         <Nuxt />
@@ -9,6 +11,9 @@
   </el-container>
 </template>
 
-<style>
-
+<style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
 </style>

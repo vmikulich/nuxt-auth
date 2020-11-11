@@ -23,7 +23,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
-    {src: '~/plugins/vuelidate', ssr: false}
+    { src: '~/plugins/vuelidate', ssr: true }
   ],
 
   serverMiddleware: [
@@ -54,8 +54,8 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    // vendor: [
-    //   'vuelidate'
-    // ]
+    build: {
+      transpile: ['vuelidate']
+    }
   }
 }

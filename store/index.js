@@ -25,7 +25,7 @@ export const actions = {
       throw e
     }
   },
-  async signup ({ dispatch }, payload) {
+  async signup ({ dispatch, commit }, payload) {
     try {
       const res = await this.$axios.$post('/api/registration', payload)
       dispatch('login', payload)
@@ -33,8 +33,13 @@ export const actions = {
       throw e
     }
   },
-  logout ({ commit }) {
-    commit('clearToken')
+  async logout ({ commit }) {
+    try {
+      const res = await this.$axios.$post('/api/logout')
+      commit('clearToken')
+    } catch (e) {
+      throw e
+    }
   }
 }
 

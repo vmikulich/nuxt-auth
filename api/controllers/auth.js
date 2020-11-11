@@ -53,7 +53,13 @@ async function register (req, res) {
   }
 }
 
+async function logout (req, res) {
+  delete req.session.token
+  res.json({ ok: true })
+}
+
 export default {
   login,
-  register
+  register,
+  logout
 }
